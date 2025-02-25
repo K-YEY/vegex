@@ -1,0 +1,134 @@
+<!DOCTYPE html >
+<html lang="en" data-barba="wrapper">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.cdnfonts.com/css/xeroda" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.6.12/i18next.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <title>Vegex Agency</title>
+</head>
+<div class="intro">
+ <div class="logo">
+  <img src="vegex.png" class="img-fluid" alt="" srcset="">
+ </div> 
+</div>
+<div id="butter">
+  
+<body id="page" data-barba="container" data-barba-namespace="home">
+
+
+  <div id="languageSwitcher" style="z-index: 100;" class="position-absolute top-0 end-0 m-3">
+    <button id="toggleLang" class="lang-btn">ع</button>
+</div>
+
+
+   
+  
+      <main class="container   text-white  flex justify-content-center align-items-center">
+      
+        <div class="col text-center img-fluid align-items-center">
+            <img src="vegex.png" class="img-fluid" id="ve" style="width: 500px;"  alt="" srcset="">
+          </div>
+        <div class="col align-items-start text-center">
+       
+            <div class="col ">
+            <h1 id="mainTitle">Vegex Agency </h1>         
+         </div>
+         
+         <div  class="col fs-2 text-center">
+          <a target="_blank" href="https://web.facebook.com/ahmedmomen.amar/"><p id="mainP">From Ahmed Momen  </p>   </a>     
+        </div>
+         
+        <!-- <div id="buttons" class="col fs-3 mt-4 d-flex flex-column flex-md-row gap-3 justify-content-center text-center">
+          <a href="tutorials.html"><button>Tutorials</button></a>  
+         <a href=""><button>Projects</button></a>
+        </div>
+        </div> -->
+
+
+    </main>
+
+ <!-- First Section -->
+<section style="margin-top: 80px; " class="container-fluid d-flex mb-5  align-items-center justify-content-center p-2">
+  <div class="row align-items-center text-white w-75 d-flex flex-column-reverse flex-md-row">
+      <!-- النص على الموبايل يكون تحت الصورة -->
+      <div class="col-md-6  text-md-start">
+          <h2 id="sectionTitle1" class="fw-bold">Latest projects</h2>
+          <p class="text-white px-0 fs-4">
+              We create stunning websites, motion graphics, and designs that bring your vision to life. Let's build something amazing together!
+          </p>
+          <button class="fs-4 mt-4 px-4 py-2" onclick="sectionNotFound()">Get Started</button>
+      </div>
+      <!-- الصورة -->
+      <div class="col-md-6 text-center">
+          <lord-icon id="gear"  class=" img-fluid"
+              colors="primary:#ffffff"
+              src="https://cdn.lordicon.com/lecprnjb.json"
+              style="width:700px;height:300px;scale: 1.1; ">
+          </lord-icon>
+      </div>
+  </div>
+</section>
+
+<!-- Second Section -->
+<section  class="container-fluid d-flex align-items-center justify-content-center mb-5 p-2">
+  <div class="row align-items-center text-white w-75 d-flex flex-column-reverse flex-md-row">
+     
+    
+    <!-- النص -->
+    <div class="col-md-6  text-md-start">
+      <h2 class="fw-bold" id="sectionTitle2">Creative Mastery</h2>
+      <p class="text-white fs-4">
+          Learn web development, motion graphics, and design with expert-led courses. Elevate your skills and turn your passion into a profession!
+      </p>
+      <a href="tutorials.html">
+          <button class="fs-4 mt-4 px-4 py-2" onclick="playClickSound()">Get Started</button>
+      </a>
+  </div>
+    <!-- الصورة -->
+      <div class="col-md-6 text-center">
+          <lord-icon class="img-fluid" id="arrow"
+              src="https://cdn.lordicon.com/aklfruoc.json"
+              colors="primary:#ffffff"
+              style="width:700px;height:300px;scale: 1.3; z-index: -1;">
+          </lord-icon>
+      </div>
+      
+  </div>
+</section>
+
+<footer style="background-color : black !important;" class="bg-dark text-white text-center py-3 mt-auto">
+  <h2 class="mb-2">Vegex</h2>
+  <div class="d-flex justify-content-center gap-3">
+      <a href="https://web.facebook.com/profile.php?id=61563471201730" target="_blank" class="text-white fs-4"><i class="fab fa-facebook"></i></a>
+      <a  target="_blank" class="text-white fs-4"><i  onclick="linkNotFound()" class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/201032210758" target="_blank" class="text-white fs-4"><i class="fab fa-whatsapp"></i></a>
+      <a   target="_blank" class="text-white fs-4"><i onclick="linkNotFound()" class="fab fa-telegram"></i></a>
+  </div>
+</footer>
+
+
+</div>
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
+<script src="https://unpkg.com/@barba/core"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+<script src="splittext.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="butter.js"></script>
+<script>
+    butter.init({cancelOnTouch: true});
+  </script>
+<script src="script.js"></script>
+</body>
+</html>
