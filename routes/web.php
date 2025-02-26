@@ -35,5 +35,15 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('main.index');
+});
+Route::get('/tutorials', function () {
+    return view('main.tutorials');
+})->name('tutorials');
+
+Route::get('/login-s', function () {
+    return view('dashboard.sign-in');
+});
+Route::get('/s-s', function () {
+    return view('dashboard.sign-up');
 });
