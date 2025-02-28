@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -12,20 +11,26 @@ class LoginController extends Controller
 {
     public function create()
     {
-        return view('auth.login');
+        return view('dashboard.sign-in');
     }
 
     public function store(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'string', 'email'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'regex:/^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com|vegex\.com)$/'
+            ],
             'password' => ['required', 'string'],
         ]);
+
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/')->with('success', 'You have successfully logged in!');
         }
 
         throw ValidationException::withMessages([

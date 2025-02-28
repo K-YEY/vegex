@@ -9,9 +9,13 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class EmailVerificationController extends Controller
 {
-    public function notice()
+    public function notice(Request $request)
     {
-        return view('auth.verify-email');
+        if ($request->user()->hasVerifiedEmail()) {
+            return redirect('/')->with('success', 'Your email is already verified.');
+        }
+
+        return view('dashboard.verify-email');
     }
 
     public function verify(EmailVerificationRequest $request)

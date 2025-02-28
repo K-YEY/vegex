@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [LoginController::class, 'create'])->name('login');
-    Route::post('login', [LoginController::class, 'store']);
+    Route::post('login', [LoginController::class, 'store'])->name('login.post');
 
     Route::get('register', [RegisterController::class, 'create'])->name('register');
-    Route::post('register', [RegisterController::class, 'store']);
+    Route::post('register', [RegisterController::class, 'store'])->name('register.post');
 
     Route::get('forgot-password', [PasswordResetController::class, 'create'])->name('password.request');
     Route::post('forgot-password', [PasswordResetController::class, 'store'])->name('password.email');
@@ -32,6 +32,11 @@ Route::middleware('auth')->group(function () {
     Route::post('email/verification-notification', [EmailVerificationController::class, 'send'])
         ->middleware(['throttle:6,1'])
         ->name('verification.send');
+
+    Route::middleware('EnsureEmailIsVerified')->group(function () {
+
+
+    });
 });
 
 Route::get('/', function () {
@@ -40,10 +45,3 @@ Route::get('/', function () {
 Route::get('/tutorials', function () {
     return view('main.tutorials');
 })->name('tutorials');
-
-Route::get('/login-s', function () {
-    return view('dashboard.sign-in');
-});
-Route::get('/s-s', function () {
-    return view('dashboard.sign-up');
-});
