@@ -24,32 +24,61 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('app/assets/css/material-dashboard.css?v=3.2.0') }}" rel="stylesheet" />
+    <!--Plugin-->
 </head>
 
-<body class="{{ !$IS_AUTH ? 'g-sidenav-show' : '' }} {{ !Request::routeIs(['register', 'password.reset', 'password.request','verification.notice']) ? 'bg-gray-100' : '' }}">
+<body
+    class="{{ !$IS_AUTH ? 'g-sidenav-show' : '' }} {{ !Request::routeIs(['register', 'password.reset', 'password.request', 'verification.notice']) ? 'bg-gray-100' : '' }}">
 
     @if ($IS_AUTH === false)
         <x-ui-dash.aside />
     @endif
     <main
-        class="main-content @if ($IS_AUTH === false) position-relative max-height-vh-100 h-100 border-radius-lg @else mt-0 @endif ">
+        class="main-content @if ($IS_AUTH === false) position-relative max-height-vh-100 h-100 border-radius-lg @else mt-0 ps @endif ">
+
         @if ($IS_AUTH === false)
             <x-ui-dash.nav />
+        @endif
+        @if ($IS_AUTH === false)
+            <div class="container-fluid py-2">
         @endif
         {{ $slot }}
         @if ($IS_AUTH === false)
             <x-ui-dash.footer />
         @endif
+        @if ($IS_AUTH === false)
+            </div>
+        @endif
+        <!-- Alert Messages -->
+        <div class="position-fixed bottom-1 end-1 z-index-2">
+            @if (session('success') || session('status'))
+                <x-ui-dash.ui.alert :IS_ERROR="false" :HEAD="'Success'" :TITLE="session('success').session('status')" />
+            @endif
+            @if ($errors->any())
+                <x-ui-dash.ui.alert :IS_ERROR="true" :HEAD="'Error'">
+                    <x-slot name="TITLE">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </x-slot>
+                </x-ui-dash.ui.alert>
+            @endif
+        </div>
 
     </main>
     @if ($IS_AUTH === false)
         <x-ui-dash.fixed-plugin />
     @endif
     <!--   Core JS Files   -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('app/assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('app/assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('app/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('app/assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('app/assets/vendors/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('app/assets/js/tinymce.js') }}"></script>
     {{ $slot_script ?? '' }}
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
@@ -60,8 +89,7 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
     </script>
-    <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('app/assets/js/material-dashboard.min.js?v=3.2.0') }}"></script>
 </body>

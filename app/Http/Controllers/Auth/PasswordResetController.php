@@ -11,9 +11,11 @@ use Illuminate\Auth\Events\PasswordReset;
 
 class PasswordResetController extends Controller
 {
+    private $_route_view = 'dashboard.auth.forgot-password';
+
     public function create()
     {
-        return view('dashboard.forgot-password');
+        return view($this->_route_view);
     }
 
     public function store(Request $request)
@@ -34,7 +36,7 @@ class PasswordResetController extends Controller
 
     public function edit(string $token)
     {
-        return view('dashboard.reset-password', ['token' => $token]);
+        return view($this->_route_view, ['token' => $token]);
     }
 
     public function update(Request $request)

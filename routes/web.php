@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\GroupVideoController as AdminGroupVideoController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\EnsureEmailIsVerified as EEIV;
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [LoginController::class, 'create'])->name('login');
@@ -33,15 +36,36 @@ Route::middleware('auth')->group(function () {
         ->middleware(['throttle:6,1'])
         ->name('verification.send');
 
-    Route::middleware('EnsureEmailIsVerified')->group(function () {
+    Route::middleware(EEIV::class)->group(function () {
+        Route::group(['prefix' => 'app'], function () {
+            // Profile Management Routes
+            Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+            Route::patch('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+            Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('password.update');
 
-
+            // dashboard
+            // user table (controller to sub,)
+            // add video
+            // videos ('rating, desc , title,')
+            // table videos (controller 2 admin(delete, edit) , user('show,rating'))
+            // check out
+        });
+    });
+    Route::middleware('admin')->group(function () {
+        Route::group(['prefix' => 'admin'], function () {
+            Route::get('/video/group', [AdminGroupVideoController::class, 'index'])->name('admin.video.group');
+        });
     });
 });
-
 Route::get('/', function () {
     return view('main.index');
 });
 Route::get('/tutorials', function () {
     return view('main.tutorials');
 })->name('tutorials');
+Route::get('/app/dash', function () {
+    return view('dashboard.auth.edit-profile');
+})->name('dash');
+Route::get('/app/videos', function () {
+    return view('dashboard.admin.video-g-create-edit');
+})->name('videos');

@@ -14,10 +14,15 @@
             </div>
             <div class="col align-items-start text-center">
                 <div class="col">
+                    @auth
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <input type="submit">
                     </form>
+               
+                    <img src="{{Auth::user()->pic ? Auth::user()->pic : asset('app/assets/img/user.jpg') }}" width="60px" height="60px">
+
+                    @endauth
                     <h1 id="mainTitle">Vegex Agency </h1>
                 </div>
                 <div class="col fs-2 text-center">

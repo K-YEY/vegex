@@ -23,6 +23,9 @@ return new class extends Migration
             $table->timestamp('two_factor_confirmed_at')
                 ->after('two_factor_recovery_codes')
                 ->nullable();
+            $table->longText('pic')
+                ->after('phone')
+                ->nullable();
         });
     }
 
@@ -33,6 +36,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn([
+                'pic',
                 'two_factor_secret',
                 'two_factor_recovery_codes',
                 'two_factor_confirmed_at',

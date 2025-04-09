@@ -9,9 +9,11 @@ use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
+    private $_route_view = 'dashboard.auth.sign-in';
+
     public function create()
     {
-        return view('dashboard.sign-in');
+        return view($this->_route_view);
     }
 
     public function store(Request $request)

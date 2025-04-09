@@ -9,20 +9,22 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class EmailVerificationController extends Controller
 {
+    private $_route_view = 'dashboard.auth.verify-email';
+
     public function notice(Request $request)
     {
         if ($request->user()->hasVerifiedEmail()) {
             return redirect('/')->with('success', 'Your email is already verified.');
         }
 
-        return view('dashboard.verify-email');
+        return view($this->_route_view);
     }
 
     public function verify(EmailVerificationRequest $request)
     {
         $request->fulfill();
 
-        return redirect()->intended('/home?verified=1');
+        return redirect()->intended('/')->with('success', 'Your email is already verified.');;
     }
 
     public function send(Request $request)

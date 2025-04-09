@@ -19,6 +19,8 @@ return new class extends Migration
             $table->decimal('rate', 2, 1)->nullable()->check('rate BETWEEN 1 AND 5');
             $table->boolean('is_active')->default(true);
             $table->integer('count_view')->default(0);
+            $table->boolean('is_free')->default(0);
+            $table->longText('cover')->nullable();
             $table->timestamps();
         });
     }

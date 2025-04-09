@@ -1,4 +1,3 @@
-<div class="container-fluid py-2">
     <footer class="footer py-4  ">
       <div class="container-fluid">
         <div class="row align-items-center justify-content-lg-between">
@@ -18,17 +17,17 @@
                 <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Bomacode</a>
               </li>
               <li class="nav-item">
-                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">Profile</a>
               </li>
               <li class="nav-item">
-                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">My Videos</a>
               </li>
               <li class="nav-item">
-                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">Check out</a>
               </li>
             </ul>
           </div>
         </div>
       </div>
     </footer>
-  </div>
+  

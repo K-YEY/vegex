@@ -11,15 +11,17 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+    private $_route_view = 'dashboard.auth.sign-up';
     public function create()
     {
-        return view('dashboard.sign-up');
+        return view($this->_route_view);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'fname' => ['required', 'string', 'max:255'],
+            'lname' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
                 'string',
@@ -52,7 +54,7 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'name' => $request->fname.' '.$request->lname,
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
