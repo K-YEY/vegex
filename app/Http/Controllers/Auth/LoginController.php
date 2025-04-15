@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Routes;
 
 class LoginController extends Controller
 {
-    private $_route_view = 'dashboard.auth.sign-in';
+    private $_route_view = Routes::$loginPage;
 
     public function create()
     {

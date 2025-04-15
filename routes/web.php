@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureEmailIsVerified as EEIV;
+use App\Http\Middleware\AdminVerfied;
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [LoginController::class, 'create'])->name('login');
@@ -51,15 +52,19 @@ Route::middleware('auth')->group(function () {
             // check out
         });
     });
-    Route::middleware('admin')->group(function () {
+    Route::middleware(AdminVerfied::class)->group(function () {
         Route::group(['prefix' => 'admin'], function () {
-            Route::get('/video/group', [AdminGroupVideoController::class, 'index'])->name('admin.video.group');
+            Route::get('/video/groups', [AdminGroupVideoController::class, 'index'])->name('admin.video.groups');
+            Route::get('/video/group/create', [AdminGroupVideoController::class, 'create'])->name('admin.video.group.create');
+            Route::post('/video/group', [AdminGroupVideoController::class, 'store'])->name('admin.video.group.store');
+            Route::get('/video/group/{groupVideo}/edit', [AdminGroupVideoController::class, 'edit'])->name('admin.video.group.edit');
+            Route::put('/video/group/{groupVideo}', [AdminGroupVideoController::class, 'update'])->name('admin.video.group.update');
         });
     });
 });
 Route::get('/', function () {
     return view('main.index');
-});
+})->name(name: 'index');
 Route::get('/tutorials', function () {
     return view('main.tutorials');
 })->name('tutorials');

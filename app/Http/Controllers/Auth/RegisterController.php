@@ -8,10 +8,11 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Routes;
 
 class RegisterController extends Controller
 {
-    private $_route_view = 'dashboard.auth.sign-up';
+    private $_route_view = Routes::$registerPage;
     public function create()
     {
         return view($this->_route_view);

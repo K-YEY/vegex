@@ -1,19 +1,20 @@
 <x-ui-dash.layout>
     <x-slot name="slot">
+        <form action="{{ isset($groupVideo) ? route('admin.video.group.update', $groupVideo) : route('admin.video.group.store') }}" method="POST" enctype="multipart/form-data">@if(isset($groupVideo)) @method('PUT') @endif
+            @csrf
         <div class="row">
             <div class="col-lg-6">
                 <h4>Group Videos</h4>
-                <p>Create a group to organize videos.</p>
+                <p>{{ isset($groupVideo) ? 'Update' : 'Create' }} a group to organize videos.</p>
             </div>
             <div class="col-lg-6 text-right d-flex flex-column justify-content-center">
-                <button type="button"
-                    class="btn bg-gradient-dark mb-0 ms-lg-auto me-lg-0 me-auto mt-lg-0 mt-2">Create</button>
+                <button type="submit" class="btn bg-gradient-dark mb-0 ms-lg-auto me-lg-0 me-auto mt-lg-0 mt-2">{{ isset($groupVideo) ? 'Update' : 'Create' }}</button>
             </div>
         </div>
         <div class="row mt-4">
             <div class="col-12">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1" checked="">
+                    <input class="form-check-input" type="checkbox" name="is_free" value="1" id="fcustomCheck1" {{ (isset($groupVideo) && !$groupVideo->price) || old('is_free') ? 'checked' : '' }}>
                     <label class="custom-control-label" for="fcustomCheck1">Make it Free</label>
                 </div>
             </div>
@@ -32,8 +33,7 @@
                         </div>
                     </div>
                     <div class="card-body text-center">
-                        <input type="file" id="coverUpload" accept="image/jpeg,image/png,image/gif"
-                            style="display: none" onchange="previewImage(this)">
+                        <input type="file" name="cover" id="coverUpload" accept="image/jpeg,image/png,image/gif" style="display: none" onchange="previewImage(this)">
                         <div class="mt-n6 mx-auto">
                             <button class="btn bg-gradient-dark btn-sm mb-0 me-2" type="button"
                                 onclick="document.getElementById('coverUpload').click()">Edit</button>
@@ -58,8 +58,7 @@
                             <div class="col-12 col-sm-12">
                                 <div class="input-group input-group-dynamic">
                                     <label class="form-label">Title</label>
-                                    <input type="text" class="form-control w-100" aria-describedby="Title"
-                                        onfocus="focused(this)" onfocusout="defocused(this)">
+                                    <input type="text" name="title" class="form-control w-100" aria-describedby="Title" value="{{ isset($groupVideo) ? $groupVideo->title : old('title') }}" onfocus="focused(this)" onfocusout="defocused(this)">
                                 </div>
                             </div>
 
@@ -68,14 +67,14 @@
                             <div class="col-6">
                                 <div class="input-group input-group-dynamic">
                                     <label class="form-label">Max Videos</label>
-                                    <input type="number" min="1" class="form-control w-100"
-                                        onfocus="focused(this)" onfocusout="defocused(this)">
+                                    <input type="number" name="max_videos" min="1" class="form-control w-100" value="{{ isset($groupVideo) ? $groupVideo->max_videos : old('max_videos') }}" onfocus="focused(this)" onfocusout="defocused(this)">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="input-group input-group-dynamic">
                                     <label class="form-label">Max Users</label>
-                                    <input type="number" min="1" class="form-control w-100"
+                                    <input type="number" name="max_users" min="1" class="form-control w-100"
+                                        value="{{ isset($groupVideo) ? $groupVideo->join_max : old('max_users') }}"
                                         onfocus="focused(this)" onfocusout="defocused(this)">
                                 </div>
                             </div>
@@ -84,15 +83,15 @@
                             <div class="col-6">
                                 <div class="input-group input-group-dynamic">
                                     <label class="form-label">Price</label>
-                                    <input type="email" class="form-control w-100" onfocus="focused(this)"
-                                        onfocusout="defocused(this)">
+                                    <input type="number" name="price" step="0.01" min="0" class="form-control w-100" value="{{ isset($groupVideo) ? $groupVideo->price : old('price') }}" onfocus="focused(this)" onfocusout="defocused(this)">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="input-group input-group-dynamic">
                                     <label class="form-label">Discount (LE)</label>
-                                    <input type="email" class="form-control w-100" onfocus="focused(this)"
-                                        onfocusout="defocused(this)">
+                                    <input type="number" name="discount" step="0.01" min="0" class="form-control w-100"
+                                        value="{{ isset($groupVideo) ? $groupVideo->discount : old('discount') }}"
+                                        onfocus="focused(this)" onfocusout="defocused(this)">
                                 </div>
                             </div>
                         </div>
@@ -106,8 +105,7 @@
                 </div>
             </div>
         </div>
-
-
+    </form>
     </x-slot>
     <x-slot name="slot_script">
         <script src="{{ asset('app/assets/js/video-g-create-edit.js') }}"></script>

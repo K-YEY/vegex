@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\PasswordReset;
+use Routes;
 
 class PasswordResetController extends Controller
 {
-    private $_route_view = 'dashboard.auth.forgot-password';
+    private $_route_view = Routes::$changePasswordPage;
 
     public function create()
     {
