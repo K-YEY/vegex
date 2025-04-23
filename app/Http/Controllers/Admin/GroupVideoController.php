@@ -7,12 +7,18 @@ use App\Models\GroupVideo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Routes;
+
 
 class GroupVideoController extends Controller
 {
-    private $_route_view = Routes::$loginPage;
+    private $_route_view_create , $_route_view_edit , $_route_view ;
+    public function __construct()
+    {
+        $this->_route_view = 'dashboard.admin.video.table.video-groups-table';
+        $this->_route_view_create = 'dashboard.admin.video.video-group';
+        $this->_route_view_edit = 'dashboard.admin.video.video-group';
+
+    }
 
     public function index()
     {
@@ -22,7 +28,7 @@ class GroupVideoController extends Controller
 
     public function create()
     {
-        return view($this->_route_view, [
+        return view($this->_route_view_create, [
             'user' => Auth::user()
         ]);
     }
@@ -64,7 +70,7 @@ class GroupVideoController extends Controller
 
     public function edit(GroupVideo $groupVideo)
     {
-        return view($this->_route_view, compact('groupVideo'));
+        return view($this->_route_view_edit, compact('groupVideo'));
     }
 
     public function update(Request $request, GroupVideo $groupVideo)

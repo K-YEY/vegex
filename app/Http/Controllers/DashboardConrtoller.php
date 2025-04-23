@@ -16,7 +16,11 @@ class DashboardConrtoller extends Controller
      * @return \Illuminate\Contracts\View\View
      *
      */
-    private $_route_view = 'admin.video.index';
+    private $_route_view;
+    public function __construct()
+    {
+        $this->_route_view = 'admin.video.index';
+    }
     public function index()
     {
         $data = [];
@@ -30,7 +34,6 @@ class DashboardConrtoller extends Controller
                 'count_videos' => $count_videos
             ];
         }
-            return view($this->_route_view, $data);
-
+        return view($this->_route_view, $data);
     }
 }

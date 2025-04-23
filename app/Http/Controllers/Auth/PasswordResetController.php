@@ -12,8 +12,11 @@ use Routes;
 
 class PasswordResetController extends Controller
 {
-    private $_route_view = Routes::$changePasswordPage;
-
+    private $_route_view ;
+    public function __construct()
+    {
+        $this->_route_view = 'dashboard.auth.reset-password';
+    }
     public function create()
     {
         return view($this->_route_view);

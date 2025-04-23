@@ -6,11 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Routes;
 
 class EmailVerificationController extends Controller
 {
-    private $_route_view = Routes::$verifyEmailPage;
+    private $_route_view;
+
+    public function __construct()
+    {
+        $this->_route_view = 'dashboard.auth.verify-email';
+    }
 
     public function notice(Request $request)
     {

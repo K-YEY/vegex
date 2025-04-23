@@ -25,15 +25,15 @@
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <a class="d-block blur-shadow-image">
                             <img id="coverPreview"
-                                src="https://demos.creative-tim.com/material-dashboard-pro/assets/img/products/product-11.jpg"
+                                src="{{ isset($groupVideo) ?asset('storage/'. $groupVideo->cover) :'https://demos.creative-tim.com/material-dashboard-pro/assets/img/products/product-11.jpg'}} "
                                 alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
                         </a>
                         <div id="coverShadow" class="colored-shadow"
-                            style="background-image: url(https://demos.creative-tim.com/material-dashboard-pro/assets/img/products/product-11.jpg);">
+                            style="background-image: url({{ isset($groupVideo) ? asset('storage/'. $groupVideo->cover) : 'https://demos.creative-tim.com/material-dashboard-pro/assets/img/products/product-11.jpg' }});">
                         </div>
                     </div>
                     <div class="card-body text-center">
-                        <input type="file" name="cover" id="coverUpload" accept="image/jpeg,image/png,image/gif" style="display: none" onchange="previewImage(this)">
+                        <input type="file" name="cover" value="{{ isset($groupVideo) ? $groupVideo->cover :''}}" id="coverUpload" accept="image/jpeg,image/png,image/gif" style="display: none" onchange="previewImage(this)">
                         <div class="mt-n6 mx-auto">
                             <button class="btn bg-gradient-dark btn-sm mb-0 me-2" type="button"
                                 onclick="document.getElementById('coverUpload').click()">Edit</button>
@@ -61,7 +61,6 @@
                                     <input type="text" name="title" class="form-control w-100" aria-describedby="Title" value="{{ isset($groupVideo) ? $groupVideo->title : old('title') }}" onfocus="focused(this)" onfocusout="defocused(this)">
                                 </div>
                             </div>
-
                         </div>
                         <div class="row mt-4">
                             <div class="col-6">
@@ -98,7 +97,7 @@
                         <div class="row mt-4">
                             <div class="col-md-12">
                                 <label class="form-label">Description</label>
-                                <textarea class="form-control" name="desc" id="tinymceExample" rows="10"></textarea>
+                                <textarea class="form-control" name="desc" id="tinymceExample" rows="10">{{ isset($groupVideo) ? $groupVideo->description : old('description') }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -108,6 +107,6 @@
     </form>
     </x-slot>
     <x-slot name="slot_script">
-        <script src="{{ asset('app/assets/js/video-g-create-edit.js') }}"></script>
+        <script src="{{ asset('app/assets/js/video.js') }}"></script>
     </x-slot>
 </x-ui-dash.layout>

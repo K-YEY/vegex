@@ -8,14 +8,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Routes;
 
 class ProfileController extends Controller
 {
-    private $_route_view_profile = Routes::$profilePage;
-    private $_route_view_edit_profile = Routes::$editProfilePage;
-
-    public function index(){
+    private $_route_view_profile;
+    private $_route_view_edit_profile;
+    public function __construct()
+    {
+        $this->_route_view_profile = 'edit-profile';
+        $this->_route_view_edit_profile = 'dashboard.profile';
+    }
+    public function index()
+    {
         return view($this->_route_view_profile, [
             'user' => Auth::user()
         ]);

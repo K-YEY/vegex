@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 
 class VideoController extends Controller
 {
-    private $_route_view = 'dashboard.admin.video';
-
+    private $_route_view ;
+    public function __construct()
+    {
+        $this->_route_view = 'dashboard.admin.video';
+    }
     public function index() {}
 
     public function create()

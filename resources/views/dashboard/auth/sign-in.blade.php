@@ -1,8 +1,8 @@
 <x-ui-dash.layout :IS_AUTH="true" :PAGE_TITLE="'Sign In'">
     <x-slot name="slot">
         <div class="page-header align-items-start min-vh-100"
-            style="background-image: url('{{ asset('app/assets/img/illustrations/illustration-reset.jpg') }}');">
-            <span class="mask bg-gradient-dark opacity-6"></span>
+            style="background-image: url('{{ asset('app/assets/img/illustrations/illustration-sign.jpg') }}');">
+            <span class="mask bg-gradient-dark opacity-4"></span>
             <div class="container my-auto">
                 <div class="row">
                     <div class="col-lg-4 col-md-8 col-12 mx-auto">
@@ -55,7 +55,7 @@
             </div>
 
 
-      
+
     </x-slot>
 
 </x-ui-dash.layout>

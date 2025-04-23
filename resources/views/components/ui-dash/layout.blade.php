@@ -25,6 +25,7 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('app/assets/css/material-dashboard.css?v=3.2.0') }}" rel="stylesheet" />
     <!--Plugin-->
+    {{ $slot_plugin ?? ''}}
 </head>
 
 <body

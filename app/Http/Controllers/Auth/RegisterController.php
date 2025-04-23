@@ -12,7 +12,11 @@ use Routes;
 
 class RegisterController extends Controller
 {
-    private $_route_view = Routes::$registerPage;
+    private $_route_view ;
+    public function __construct()
+    {
+        $this->_route_view = 'dashboard.auth.sign-up';
+    }
     public function create()
     {
         return view($this->_route_view);

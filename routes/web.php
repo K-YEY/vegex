@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/video/group', [AdminGroupVideoController::class, 'store'])->name('admin.video.group.store');
             Route::get('/video/group/{groupVideo}/edit', [AdminGroupVideoController::class, 'edit'])->name('admin.video.group.edit');
             Route::put('/video/group/{groupVideo}', [AdminGroupVideoController::class, 'update'])->name('admin.video.group.update');
+            Route::put('/video/group/{groupVideo}/destroy', [AdminGroupVideoController::class, 'destroy'])->name('admin.video.group.destroy');
         });
     });
 });
@@ -72,5 +73,5 @@ Route::get('/app/dash', function () {
     return view('dashboard.auth.edit-profile');
 })->name('dash');
 Route::get('/app/videos', function () {
-    return view('dashboard.admin.video-g-create-edit');
+    return view('dashboard.admin.video.table.video-groups-table');
 })->name('videos');
