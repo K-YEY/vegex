@@ -22,7 +22,7 @@ class GroupVideoController extends Controller
 
     public function index()
     {
-        $groups = GroupVideo::latest()->paginate(10);
+        $groups = GroupVideo::all();
         return view($this->_route_view, compact('groups'));
     }
 

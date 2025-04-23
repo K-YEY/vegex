@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\GroupVideoController as AdminGroupVideoController;
+use App\Http\Controllers\Admin\VideoController as AdminVideoController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\EmailVerificationController;
@@ -54,12 +55,21 @@ Route::middleware('auth')->group(function () {
     });
     Route::middleware(AdminVerfied::class)->group(function () {
         Route::group(['prefix' => 'admin'], function () {
+            // Group Video Routes
             Route::get('/video/groups', [AdminGroupVideoController::class, 'index'])->name('admin.video.groups');
             Route::get('/video/group/create', [AdminGroupVideoController::class, 'create'])->name('admin.video.group.create');
             Route::post('/video/group', [AdminGroupVideoController::class, 'store'])->name('admin.video.group.store');
             Route::get('/video/group/{groupVideo}/edit', [AdminGroupVideoController::class, 'edit'])->name('admin.video.group.edit');
             Route::put('/video/group/{groupVideo}', [AdminGroupVideoController::class, 'update'])->name('admin.video.group.update');
             Route::put('/video/group/{groupVideo}/destroy', [AdminGroupVideoController::class, 'destroy'])->name('admin.video.group.destroy');
+
+            // Video Routes
+            Route::get('/videos', [AdminVideoController::class, 'index'])->name('admin.videos');
+            Route::get('/video/create', [AdminVideoController::class, 'create'])->name('admin.video.create');
+            Route::post('/video', [AdminVideoController::class, 'store'])->name('admin.video.store');
+            Route::get('/video/{id}/edit', [AdminVideoController::class, 'edit'])->name('admin.video.edit');
+            Route::put('/video/{id}', [AdminVideoController::class, 'update'])->name('admin.video.update');
+            Route::delete('/video/{id}', [AdminVideoController::class, 'destroy'])->name('admin.video.destroy');
         });
     });
 });
@@ -73,5 +83,5 @@ Route::get('/app/dash', function () {
     return view('dashboard.auth.edit-profile');
 })->name('dash');
 Route::get('/app/videos', function () {
-    return view('dashboard.admin.video.table.video-groups-table');
+    return view('dashboard.video.videos-group');
 })->name('videos');

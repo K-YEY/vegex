@@ -25,6 +25,8 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('app/assets/css/material-dashboard.css?v=3.2.0') }}" rel="stylesheet" />
     <!--Plugin-->
+    <link rel="stylesheet" href="{{ asset('app/assets/css/choices.min.css') }}">
+
     {{ $slot_plugin ?? ''}}
 </head>
 
@@ -79,6 +81,8 @@
     <script src="{{ asset('app/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('app/assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
     <script src="{{ asset('app/assets/vendors/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('app/assets/js/plugins/choices.min.js') }}"></script>
+
     <script src="{{ asset('app/assets/js/tinymce.js') }}"></script>
     {{ $slot_script ?? '' }}
     <script>

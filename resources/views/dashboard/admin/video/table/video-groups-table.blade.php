@@ -1,40 +1,49 @@
 <x-ui-dash.layout>
     <x-slot name="slot">
+        <div class="row">
+            <div class="col-lg-6">
+                <h4>Groups Video</h4>
+                <p>Manage Your Groups</p>
+            </div>
+            <div class="col-lg-6 text-right d-flex flex-column justify-content-center">
+                <a href="{{ route('admin.video.create') }}" class="btn bg-gradient-dark mb-0 ms-lg-auto me-lg-0 me-auto mt-lg-0 mt-2">Add New Video</a>
+            </div>
+        </div>
         <div class="row mt-4">
             <div class="col-12">
-                <x-ui-dash.ui.data-table title="Groups Video" subtitle="Groups for all videos" id="groups-video-table"
-                    :columns="[
-                        'Title',
-                        'description',
-                        'Price (Discount)',
-                        'Subscribers',
-                        'Max Videos (Videos)',
-                        'Rate',
-                        'Actions',
-                    ]">
+                <x-ui-dash.ui.data-table title="Groups Video" subtitle="Manage Your Groups" id="groups-video-table"
+                    :columns="['Title', 'Price (Discount)', 'Subscribers', 'Max Videos (Videos)', 'Rate', 'Actions']">
                     @foreach ($groups as $group)
                         <tr>
                             <td class="text-xs font-weight-normal">
-                                <div class="d-flex align-items-center">
-                                    @if ($group->cover)
-                                        <img src="{{ asset('storage/' . $group->cover) }}" class="avatar avatar-xs me-2"
-                                            alt="{{ $group->title }}">
-                                    @else
-                                        <img src="../../../assets/img/team-2.jpg" class="avatar avatar-xs me-2"
-                                            alt="default image">
-                                    @endif
-                                    <span>{{ $group->title }}</span>
+                                <div class="d-flex px-2 py-1  align-items-center">
+                                    <div>
+                                        @if ($group->cover)
+                                            <img src="{{ asset('storage/' . $group->cover) }}"
+                                                class="avatar avatar-xs me-2" alt="{{ $group->title }}">
+                                        @else
+                                            <img src="../../../assets/img/team-2.jpg" class="avatar avatar-xs me-2"
+                                                alt="default image">
+                                        @endif
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <span>{{ $group->title }}</span>
+                                        <p class="text-xs text-secondary mb-0">
+                                            {{ strip_tags(Str::limit($group->description, 50)) }}</p>
+                                    </div>
                                 </div>
+
                             </td>
-                            <td class="text-sm font-weight-normal">{{ strip_tags(Str::limit($group->description, 50)) }}
-                            </td>
+
                             <td class="text-sm font-weight-normal">
                                 @if ($group->price == 0)
                                     Free
                                 @else
-                                    ${{ number_format($group->price, 2) }}
                                     @if ($group->discount)
-                                        <span class="text-success">({{ number_format($group->discount, 2) }})</span>
+                                    <span class="text-success text-gradient">${{ number_format(  $group->price - $group->discount, 2) }}</span>
+                                    <s> <sup class="text-danger text-gradient">${{ number_format($group->price, 2) }}</sup></s>
+                                    @else
+                                      <span class="text-success text-gradient">${{ number_format($group->price, 2) }}</span>
                                     @endif
                                 @endif
                             </td>
