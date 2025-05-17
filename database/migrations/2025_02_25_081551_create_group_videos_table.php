@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('max_videos')->nullable();
             $table->integer('join_max')->nullable();
             $table->decimal('rate', 2, 1)->nullable()->check('rate BETWEEN 1 AND 5');
+            $table->bigInteger('duration')->nullable();
             $table->longText('cover')->nullable();
             $table->timestamps();
         });

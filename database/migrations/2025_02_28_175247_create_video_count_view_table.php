@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('userId')->constrained('users')->onDelete('cascade');
             $table->foreignId('video_group_id')->constrained('group_videos')->onDelete('cascade');
             $table->foreignId('video_id')->constrained('videos')->onDelete('cascade');
+            $table->decimal('rate', 2, 1)->nullable()->check('rate BETWEEN 1 AND 5');
             $table->timestamps();
         });
     }

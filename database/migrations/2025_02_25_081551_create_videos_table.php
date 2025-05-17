@@ -20,7 +20,9 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->integer('count_view')->default(0);
             $table->boolean('is_free')->default(0);
+            $table->bigInteger('duration')->nullable();
             $table->longText('cover')->nullable();
+
             $table->timestamps();
         });
     }

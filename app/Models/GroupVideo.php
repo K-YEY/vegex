@@ -10,7 +10,7 @@ class GroupVideo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'price', 'discount', 'count_subscribers', 'total_videos', 'max_videos', 'join_max', 'rate', 'cover'];
+    protected $fillable = ['title', 'description', 'price', 'discount', 'count_subscribers', 'total_videos', 'max_videos', 'join_max', 'rate', 'duration', 'cover'];
 
     public function subscriptions(): HasMany
     {

@@ -28,6 +28,9 @@
     <link rel="stylesheet" href="{{ asset('app/assets/css/choices.min.css') }}">
 
     {{ $slot_plugin ?? ''}}
+    <link rel="stylesheet" href="{{ asset('app/assets/css/rating.css') }}">
+    <link rel="stylesheet" href="{{ asset('app/assets/css/promo-cards.css') }}">
+
 </head>
 
 <body

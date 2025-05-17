@@ -76,4 +76,36 @@ class VideoGroupHelper
     {
         return $currentUsers < $maxUsers;
     }
+
+    /**
+     * Format duration in minutes to human-readable format
+     *
+     * @param int|null $duration Duration in minutes
+     * @return string Formatted duration (e.g. "2h 30m" or "45m")
+     */
+    public static function formatDuration(?int $duration): string
+    {
+        if (!$duration) {
+            return 'NaN';
+        }
+
+        if ($duration < 60) {
+            return $duration . 's';
+        }
+
+        if ($duration < 3600) {
+            return floor($duration / 60) . 'm';
+        }
+
+        $hours = floor($duration / 3600);
+        return $hours . 'h';
+    }
+
+    public static function AssetMedia($media): string
+    {
+        if ($media == null)
+            return asset('app/assets/img/bg-auth.jpg');
+        else
+            return asset('storage/' . $media);
+    }
 }

@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function resetCover() {
-    const defaultImage = 'https://demos.creative-tim.com/material-dashboard-pro/assets/img/products/product-11.jpg';
+    const defaultImage = '//public/app/assets/img/bg-auth.jpg';
     const coverPreview = document.getElementById('coverPreview');
     const coverShadow = document.getElementById('coverShadow');
     const imageError = document.getElementById('imageError');

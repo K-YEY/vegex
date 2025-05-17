@@ -6,7 +6,8 @@
                 <p>Manage Your Groups</p>
             </div>
             <div class="col-lg-6 text-right d-flex flex-column justify-content-center">
-                <a href="{{ route('admin.video.create') }}" class="btn bg-gradient-dark mb-0 ms-lg-auto me-lg-0 me-auto mt-lg-0 mt-2">Add New Video</a>
+                <a href="{{ route('admin.video.create') }}"
+                    class="btn bg-gradient-dark mb-0 ms-lg-auto me-lg-0 me-auto mt-lg-0 mt-2">Add New Video</a>
             </div>
         </div>
         <div class="row mt-4">
@@ -18,13 +19,9 @@
                             <td class="text-xs font-weight-normal">
                                 <div class="d-flex px-2 py-1  align-items-center">
                                     <div>
-                                        @if ($group->cover)
-                                            <img src="{{ asset('storage/' . $group->cover) }}"
-                                                class="avatar avatar-xs me-2" alt="{{ $group->title }}">
-                                        @else
-                                            <img src="../../../assets/img/team-2.jpg" class="avatar avatar-xs me-2"
-                                                alt="default image">
-                                        @endif
+                                        <img src="{{ $group->cover ? asset('storage/' . $group->cover) : asset('app/assets/img/bg-auth.jpg') }}"
+                                            class="avatar avatar-xs me-2" alt="{{ $group->title }}">
+
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
                                         <span>{{ $group->title }}</span>
@@ -40,10 +37,13 @@
                                     Free
                                 @else
                                     @if ($group->discount)
-                                    <span class="text-success text-gradient">${{ number_format(  $group->price - $group->discount, 2) }}</span>
-                                    <s> <sup class="text-danger text-gradient">${{ number_format($group->price, 2) }}</sup></s>
+                                        <span
+                                            class="text-success text-gradient">${{ number_format($group->price - $group->discount, 2) }}</span>
+                                        <s> <sup
+                                                class="text-danger text-gradient">${{ number_format($group->price, 2) }}</sup></s>
                                     @else
-                                      <span class="text-success text-gradient">${{ number_format($group->price, 2) }}</span>
+                                        <span
+                                            class="text-success text-gradient">${{ number_format($group->price, 2) }}</span>
                                     @endif
                                 @endif
                             </td>

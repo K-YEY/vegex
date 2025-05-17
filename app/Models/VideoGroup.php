@@ -21,4 +21,8 @@ class VideoGroup extends Model
     {
         return $this->belongsTo(Video::class, 'video_id');
     }
+    public function videos()
+    {
+        return $this->hasMany(Video::class);
+    }
 }

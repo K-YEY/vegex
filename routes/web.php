@@ -7,10 +7,17 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\VideoGroupController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureEmailIsVerified as EEIV;
 use App\Http\Middleware\AdminVerfied;
 
+Route::get('/', function () {
+    return view('main.index');
+})->name(name: 'index');
+Route::get('/tutorials', function () {
+    return view('main.tutorials');
+})->name('tutorials');
 Route::middleware('guest')->group(function () {
     Route::get('login', [LoginController::class, 'create'])->name('login');
     Route::post('login', [LoginController::class, 'store'])->name('login.post');
@@ -45,6 +52,17 @@ Route::middleware('auth')->group(function () {
             Route::patch('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
             Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('password.update');
 
+            // Video Group Routes for Users
+            Route::get('/courses', [VideoGroupController::class, 'index'])->name('user.courses.groups');
+            Route::get('/course/{id}', [VideoGroupController::class, 'show'])->name('user.courses.group.show');
+            Route::get('/course/{id}/subscribe', [VideoGroupController::class, 'subscribe'])->name('user.subscription.courses.create');
+
+            Route::get('/courses/{id}/videos', [VideoGroupController::class, 'showVideos'])->name('user.courses.videos.show');
+            Route::get('/course/{courseid}/video/{id}', [VideoGroupController::class, 'showVideo'])->name('user.video.show');
+
+            // Video navigation route
+            Route::get('/video/{id}', [\App\Http\Controllers\User\VideoController::class, 'show'])->name('dashboard.video.show');
+
             // dashboard
             // user table (controller to sub,)
             // add video
@@ -73,15 +91,3 @@ Route::middleware('auth')->group(function () {
         });
     });
 });
-Route::get('/', function () {
-    return view('main.index');
-})->name(name: 'index');
-Route::get('/tutorials', function () {
-    return view('main.tutorials');
-})->name('tutorials');
-Route::get('/app/dash', function () {
-    return view('dashboard.auth.edit-profile');
-})->name('dash');
-Route::get('/app/videos', function () {
-    return view('dashboard.video.videos-group');
-})->name('videos');

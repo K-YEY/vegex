@@ -1,0 +1,155 @@
+@import url("https://fonts.googleapis.com/css2?family=Sura:wght@400;700&display=swap");
+
+:root {
+  --size: 60%;
+  --space: 1vmin;
+  --duration: 300ms;
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+  --bounce-out: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.promo {
+  position: relative;
+  cursor: pointer;
+  width: 160px; /* Fixed width instead of percentage */
+  height: 100%;
+  min-height: 150px;
+  max-width: 100%; /* Ensures it doesn't overflow on smaller screens */
+}
+
+.promo .title {
+  --font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 14px;
+  font-size: var(--font-size);
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: normal;
+  transform: translate(0, -50%);
+  transition: transform var(--duration) var(--ease-out);
+  pointer-events: none;
+  z-index: 10;
+  color: #4392F1;
+  max-width: 90%;
+  -webkit-transform: translate(0, -50%);
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -o-transform: translate(0, -50%);
+  -webkit-transition: transform var(--duration) var(--ease-out);
+  -moz-transition: transform var(--duration) var(--ease-out);
+  -ms-transition: transform var(--duration) var(--ease-out);
+  -o-transition: transform var(--duration) var(--ease-out);
+}
+
+.promo .title::after {
+  content: attr(data-cta);
+  display: inline-block;
+  margin-left: 1.5vmin;
+  font-size: calc(var(--font-size) / 2.5);
+  font-weight: 400;
+  letter-spacing: 0.125vmin;
+  opacity: 0;
+  transform: translateX(-25%);
+  transition: transform var(--duration) var(--ease-out),
+    opacity var(--duration) var(--ease-out);
+}
+
+.promo .image-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 0 50%, 0% 0%);
+  transition: transform var(--duration) var(--ease-out),
+    clip-path var(--duration) var(--ease-out);
+}
+
+/* Custom styling for previous and next video cards */
+.prev-video-card .promo .image-wrapper {
+  clip-path: polygon(25% 0%, 0% 50%, 25% 100%, 100% 100%, 75% 50%, 100% 0%);
+}
+
+.next-video-card .promo .image-wrapper {
+  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+}
+
+.promo .image-wrapper img {
+  position: relative;
+  width: 120%;
+  height: 100%;
+  object-fit: cover;
+  transform: translateX(-10%);
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.promo .image-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--overlay-color);
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+  transform: translateZ(0);
+  transition: opacity var(--duration) var(--ease-out);
+}
+
+.promo:hover img {
+  transform: translateX(0);
+}
+
+.promo:hover .image-wrapper {
+  transform: translateX(0%);
+  transition-timing-function: var(--bounce-out);
+  -webkit-transform: translateX(0%);
+  -moz-transform: translateX(0%);
+  -ms-transform: translateX(0%);
+  -o-transform: translateX(0%);
+}
+
+.prev-video-card .promo:hover .image-wrapper {
+  transform: translateX(-5%);
+  -webkit-transform: translateX(-5%);
+  -moz-transform: translateX(-5%);
+  -ms-transform: translateX(-5%);
+  -o-transform: translateX(-5%);
+}
+
+.next-video-card .promo:hover .image-wrapper {
+  transform: translateX(5%);
+  -webkit-transform: translateX(5%);
+  -moz-transform: translateX(5%);
+  -ms-transform: translateX(5%);
+  -o-transform: translateX(5%);
+}
+
+
+.promo:hover .title {
+  transform: translate(5%, -50%);
+  transition-timing-function: var(--bounce-out);
+  opacity: 1;
+}
+
+.promo:hover .title::after {
+  opacity: 1;
+  transform: translateX(0);
+  transition-timing-function: var(--bounce-out);
+}
+
+.promo:hover .image-wrapper::after {
+  opacity: 1;
+}
+
+/* Specific styles for previous and next video cards */
+.prev-video-card .promo {
+  --overlay-color: #E7F0FF;
+}
+
+.next-video-card .promo {
+  --overlay-color: #E7F0FF;
+}

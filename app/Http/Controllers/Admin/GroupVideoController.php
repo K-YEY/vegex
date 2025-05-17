@@ -62,6 +62,7 @@ class GroupVideoController extends Controller
             'price' => $request->is_free ? 0 : $request->price,
             'discount' => $request->discount,
             'cover' => $coverPath,
+            'duration' => 0, // Initialize duration to 0
         ]);
 
         return redirect()->route('admin.video.groups')
@@ -93,6 +94,7 @@ class GroupVideoController extends Controller
             $groupVideo->cover = $coverPath;
         }
 
+        // Keep the existing duration value when updating other fields
         $groupVideo->update([
             'title' => $request->title,
             'description' => $request->desc,
@@ -100,6 +102,7 @@ class GroupVideoController extends Controller
             'join_max' => $request->max_users,
             'price' => $request->is_free ? 0 : $request->price,
             'discount' => $request->discount,
+            // Duration is managed by VideoController when videos are added/removed
         ]);
 
         return redirect()->route('admin.video.groups')

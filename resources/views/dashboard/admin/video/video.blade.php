@@ -39,11 +39,11 @@
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <a class="d-block blur-shadow-image">
                                 <img id="coverPreview"
-                                    src="{{ isset($video) && $video->cover ? asset('storage/' . $video->cover) : 'https://demos.creative-tim.com/material-dashboard-pro/assets/img/products/product-11.jpg' }} "
+                                    src="{{ isset($video) && $video->cover ? asset('storage/' . $video->cover) : asset('app/assets/img/bg-auth.jpg') }} "
                                     alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
                             </a>
                             <div id="coverShadow" class="colored-shadow"
-                                style="background-image: url({{ isset($video) && $video->cover ? asset('storage/' . $video->cover) : 'https://demos.creative-tim.com/material-dashboard-pro/assets/img/products/product-11.jpg' }});">
+                                style="background-image: url({{ isset($video) && $video->cover ? asset('storage/' . $video->cover) : asset('app/assets/img/bg-auth.jpg') }});">
                             </div>
                         </div>
                         <div class="card-body text-center">
