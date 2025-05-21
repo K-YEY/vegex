@@ -12,6 +12,7 @@ class VideoCountView extends Model
         'video_group_id',
         'video_id',
         'rate',
+        'session_id',
     ];
 
     public function user()

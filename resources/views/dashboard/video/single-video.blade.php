@@ -7,7 +7,8 @@
                         <h5 class="mb-4">Course Details</h5>
                         <div class="row">
                             <div class="col-md-12 text-center ">
-                                <div class="h-100 w-100"> <x-ui-dash.ui.ui-video
+                                <div class="h-100 w-100"> <x-ui-dash.ui.ui-video videoId="{{ $video->id }}"
+                                        videoGroupId="{{ $videoGroup->video_group_id }}"
                                         src="{{ App\Helpers\VideoGroupHelper::AssetMedia($video->video_path) }}"
                                         poster="{{ App\Helpers\VideoGroupHelper::AssetMedia($video->cover) }}"></x-ui-dash.ui.ui-video>
                                 </div>
@@ -21,8 +22,11 @@
                                         <h3 class="mt-lg-0 mt-4 mb-0">{{ $video->title }}</h3>
                                         <div class="d-flex align-items-center gap-2">
                                             <div class="rating">
+
+                                                <x-ui-dash.ui.rating
+                                                    rating_count="{{ $video->rate }}"></x-ui-dash.ui.rating>
                                                 <span class="badge bg-warning d-flex align-items-center">
-                                                    {{ $video->rating == 0 ? 'Be First smile' : number_format($video->rating, 1) }}
+                                                    {{ $video->rate == 0 ? 'Be First smile' : number_format($video->rate, 1) }}
                                                 </span>
                                             </div>
                                             <div class="duration">
@@ -47,7 +51,9 @@
                         </div>
                         <div class="row">
                             <div class="rating">
-                                <x-ui-dash.ui.rating is_rating="{{$video->rateing}}"></x-ui-dash.ui.rating>
+                                <x-ui-dash.ui.rating videoId="{{ $video->id }}" rating_count="{{ $userRate->rate }}"
+                                    videoGroupId="{{ $videoGroup->video_group_id }}" is_rating="{{ $video->rateing }}"
+                                    is_rating="true"></x-ui-dash.ui.rating>
 
                             </div>
                             <h6 class="mt-4 text-bold">Description</h6>
@@ -64,8 +70,8 @@
                                                         alt="Previous lesson thumbnail">
                                                 </div>
                                                 <h2 class="title text-truncate" data-cta="Watch →">
-                                                    {{ Str::limit($video->previousVideo->title, 6) }}</h2>
-                                                <a href="{{ route('dashboard.video.show', $video->previousVideo->id) }}"
+                                                    {{ Str::limit($video->previousVideo->title, 30) }}</h2>
+                                                <a href="{{ route('user.video.show', ['courseid' => $videoGroup->video_group_id, 'id' => $video->previousVideo->id]) }}"
                                                     class="stretched-link"></a>
                                             </div>
                                         </div>
@@ -79,8 +85,8 @@
                                                         alt="Next lesson thumbnail">
                                                 </div>
                                                 <h2 class="title text-truncate" data-cta="Continue →">
-                                                    {{ Str::limit($video->nextVideo->title, 6) }}</h2>
-                                                <a href="{{ route('dashboard.video.show', $video->nextVideo->id) }}"
+                                                    {{ Str::limit($video->nextVideo->title, 30) }}</h2>
+                                                <a href="{{ route('user.video.show', ['courseid' => $videoGroup->video_group_id, 'id' => $video->nextVideo->id]) }}"
                                                     class="stretched-link"></a>
                                             </div>
                                         </div>

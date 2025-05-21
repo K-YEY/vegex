@@ -1,19 +1,14 @@
-{{--
-
-TODO: Check eleaments on save video  description filter
---}}
-
 <x-ui-dash.layout>
     <x-slot name="slot">
 
-        <div class="row mt-3">
+        <div class="row">
             @foreach ($videos as $video)
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 mt-6">
                     <div class="card" @if ($isAdmin) data-animation="true" @endif>
                         <div class="card-header p-2 position-relative z-index-2 bg-transparent">
                             <a class="d-block blur-shadow-image">
                                 <img src="{{ App\Helpers\VideoGroupHelper::AssetMedia($video->cover) ?? App\Helpers\VideoGroupHelper::AssetMedia(null) }}"
-                                    alt="{{ $video->title }}" class="img-fluid shadow border-radius-lg">
+                                    alt="{{ $video->title }}" class="img-fluid shadow border-radius-lg" style="width: 100%; height: 300px; object-fit: cover;">
                             </a>
                             <div class="colored-shadow"
                                 style="background-image: url({{ App\Helpers\VideoGroupHelper::AssetMedia($video->cover) ?? App\Helpers\VideoGroupHelper::AssetMedia(null) }})">
@@ -44,32 +39,7 @@ TODO: Check eleaments on save video  description filter
                         <div class="card-footer d-flex justify-content-between align-items-center">
 
                             <div class="d-flex align-items-center">
-                                <div class="feedback">
-                                    @php
-                                        $rating = $video->rating ?? 0;
-                                        $ratingClass = match (true) {
-                                            $rating >= 4.5 => 'happy',
-                                            $rating >= 3.5 => 'good',
-                                            $rating >= 2.5 => 'ok',
-                                            $rating >= 1.5 => 'sad',
-                                            default => 'happy',
-                                        };
-                                    @endphp
-                                    <label class="{{ $ratingClass }}">
-                                        <input type="radio" disabled name="show{{$video->id}}" checked />
-                                        <div>
-                                            <svg class="eye left">
-                                                <use xlink:href="#eye">
-                                            </svg>
-                                            <svg class="eye right">
-                                                <use xlink:href="#eye">
-                                            </svg>
-                                            <svg class="mouth">
-                                                <use xlink:href="#mouth">
-                                            </svg>
-                                        </div>
-                                    </label>
-                                </div>
+                                <x-ui-dash.ui.rating id="{{ $video->id }}"></x-ui-dash.ui.rating>
                             </div>
 
                             <div class="d-flex align-items-center">

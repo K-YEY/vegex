@@ -28,11 +28,11 @@ function previewImage(input) {
             const img = new Image();
             img.onload = function() {
                 // Validate dimensions
-                if (this.width <= 1200 || this.height <= 1200) {
-                    imageError.textContent = 'Image dimensions must be 1200x1200 pixels';
-                    imageError.style.display = 'block';
-                    return;
-                }
+                // if (this.width <= 1200 || this.height <= 1200) {
+                //     imageError.textContent = 'Image dimensions must be 1200x1200 pixels';
+                //     imageError.style.display = 'block';
+                //     return;
+                // }
 
                 // Update preview and shadow
                 coverPreview.src = e.target.result;

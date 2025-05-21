@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/images/ico/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('assets/images/ico/favicon-32x32.png') }}">
     <title>
@@ -26,8 +27,6 @@
     <link id="pagestyle" href="{{ asset('app/assets/css/material-dashboard.css?v=3.2.0') }}" rel="stylesheet" />
     <!--Plugin-->
     <link rel="stylesheet" href="{{ asset('app/assets/css/choices.min.css') }}">
-
-    {{ $slot_plugin ?? ''}}
     <link rel="stylesheet" href="{{ asset('app/assets/css/rating.css') }}">
     <link rel="stylesheet" href="{{ asset('app/assets/css/promo-cards.css') }}">
 
@@ -58,7 +57,7 @@
         <!-- Alert Messages -->
         <div class="position-fixed bottom-1 end-1 z-index-2">
             @if (session('success') || session('status'))
-                <x-ui-dash.ui.alert :IS_ERROR="false" :HEAD="'Success'" :TITLE="session('success').session('status')" />
+                <x-ui-dash.ui.alert :IS_ERROR="false" :HEAD="'Success'" :TITLE="session('success') . session('status')" />
             @endif
             @if ($errors->any())
                 <x-ui-dash.ui.alert :IS_ERROR="true" :HEAD="'Error'">
@@ -78,7 +77,9 @@
         <x-ui-dash.fixed-plugin />
     @endif
     <!--   Core JS Files   -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('app/assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('app/assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('app/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>

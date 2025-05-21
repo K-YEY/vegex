@@ -1,6 +1,8 @@
 @props([
     'src' => '',
     'poster' => null,
+    'videoId' => null,
+    'videoGroupId' => null,
 ])
 
 <div class="video-container" style="position: relative;">
@@ -81,7 +83,7 @@
             const test = document.querySelector('media-fullscreen-button');
 
             container.appendChild(watermark);
-            test.appendChild(watermark);
+
 
             // Get the videojs-video element
             const videoElement = document.querySelector('videojs-video');
@@ -94,6 +96,70 @@
 
             videoElement.addEventListener('pause', function() {
                 watermark.style.opacity = '0.5';
+            });
+            var videoViewd = false;
+            // Add event listener for video time update
+            videoElement.addEventListener('timeupdate', function() {
+
+                // Get the actual video element
+                const video = document.querySelector('videojs-video');
+
+                if (!video) return;
+                if (videoViewd) return;
+                // Check if user has watched half of the video
+                if (video.currentTime >= (video.duration / 2)) {
+                    // Get video ID and group ID from props
+                    @if ($videoId && $videoGroupId)
+                        // Get CSRF token
+                        const csrfToken = '{{ csrf_token() }}';
+
+                        // Check if CSRF token exists
+                        if (!csrfToken) {
+                            console.error(
+                                'CSRF token not found. Make sure the meta tag exists in your layout.');
+                            return;
+                        }
+
+                        // Send AJAX request to count view using named route
+                        fetch(`{{ route('api.video.count.view', [
+                            'id' => $videoId,
+                            'groupId' => $videoGroupId,
+                            'rate' => 0,
+                            'isView' => 'true',
+                        ]) }}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': csrfToken,
+                                    'Accept': 'application/json'
+                                }
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                videoViewd = true;
+                            })
+                            .catch(error => {
+                                // Provide more specific error messages based on error type
+                                if (error.name === 'TypeError' && error.message.includes(
+                                        'Failed to fetch')) {
+                                    console.error(
+                                        'Network error: Check your internet connection or server availability'
+                                    );
+                                } else if (error.name === 'SyntaxError') {
+                                    console.error('Invalid JSON response from server');
+                                } else {
+                                    console.error('Error counting view:', error.message);
+                                }
+                            });
+                    @else
+                        console.log('Video view tracking disabled: video or videoGroup not provided');
+                    @endif
+                }
             });
 
             // Handle fullscreen changes

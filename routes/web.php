@@ -2,12 +2,13 @@
 
 use App\Http\Controllers\Admin\GroupVideoController as AdminGroupVideoController;
 use App\Http\Controllers\Admin\VideoController as AdminVideoController;
+use App\Http\Controllers\Api\VideoCountViewController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\User\VideoGroupController;
+use App\Http\Controllers\User\VideoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureEmailIsVerified as EEIV;
 use App\Http\Middleware\AdminVerfied;
@@ -53,15 +54,14 @@ Route::middleware('auth')->group(function () {
             Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('password.update');
 
             // Video Group Routes for Users
-            Route::get('/courses', [VideoGroupController::class, 'index'])->name('user.courses.groups');
-            Route::get('/course/{id}', [VideoGroupController::class, 'show'])->name('user.courses.group.show');
-            Route::get('/course/{id}/subscribe', [VideoGroupController::class, 'subscribe'])->name('user.subscription.courses.create');
+            Route::get('/courses', [VideoController::class, 'index'])->name('user.courses.groups');
+            Route::get('/course/{id}', [VideoController::class, 'show'])->name('user.courses.group.show');
+            Route::get('/course/{id}/subscribe', [VideoController::class, 'subscribe'])->name('user.subscription.courses.create');
 
-            Route::get('/courses/{id}/videos', [VideoGroupController::class, 'showVideos'])->name('user.courses.videos.show');
-            Route::get('/course/{courseid}/video/{id}', [VideoGroupController::class, 'showVideo'])->name('user.video.show');
+            Route::get('/courses/{id}/videos', [VideoController::class, 'showVideos'])->name('user.courses.videos.show');
+            Route::get('/course/{courseid}/video/{id}', [VideoController::class, 'showVideo'])->name('user.video.show');
 
-            // Video navigation route
-            Route::get('/video/{id}', [\App\Http\Controllers\User\VideoController::class, 'show'])->name('dashboard.video.show');
+            Route::post('/video-count-view/{id}/{groupId}/{rate}/{isView}', [VideoCountViewController::class, 'store'])->name('api.video.count.view');
 
             // dashboard
             // user table (controller to sub,)
