@@ -97,7 +97,6 @@ class VideoController extends Controller
             DB::commit();
 
             return redirect()->route('admin.videos')->with('success', 'Video created successfully');
-
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', 'Error creating video: ' . $e->getMessage())->withInput();
@@ -222,7 +221,6 @@ class VideoController extends Controller
             DB::commit();
 
             return redirect()->route('admin.videos')->with('success', 'Video updated successfully');
-
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', 'Error updating video: ' . $e->getMessage())->withInput();
@@ -239,6 +237,7 @@ class VideoController extends Controller
             $videoGroup = VideoGroup::where('video_id', $id)->first();
             $groupId = $videoGroup ? $videoGroup->video_group_id : null;
 
+
             // Delete video file
             if ($video->video_path) {
                 Storage::disk('public')->delete($video->video_path);
@@ -251,6 +250,7 @@ class VideoController extends Controller
 
             // Delete video and its relationships
             $video->delete();
+
 
             // Update group video duration
             if ($groupId) {

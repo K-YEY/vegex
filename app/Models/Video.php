@@ -37,7 +37,7 @@ class Video extends Model
                     ->from('video_group')
                     ->whereIn('video_group_id', $groupIds);
             })
-            ->where('id', '<', $this->id)
+            ->where('id', '<', $this->id)->where('is_active', 1)
             ->orderBy('id', 'desc')
             ->first();
     }
@@ -60,7 +60,7 @@ class Video extends Model
                     ->from('video_group')
                     ->whereIn('video_group_id', $groupIds);
             })
-            ->where('id', '>', $this->id)
+            ->where('id', '>', $this->id)->where('is_active', 1)
             ->orderBy('id', 'asc')
             ->first();
     }

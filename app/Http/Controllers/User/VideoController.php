@@ -54,7 +54,9 @@ class VideoController extends Controller
             $query->select('video_id')
                 ->from('video_group')
                 ->where('video_group_id', $id);
-        })->get();
+        })
+            ->where('is_active', 1)
+            ->get();
 
         return view($this->_route_view, compact('videoGroup', 'videos'));
     }
@@ -89,7 +91,7 @@ class VideoController extends Controller
             $query->select('video_id')
                 ->from('video_group')
                 ->where('video_group_id', $id);
-        })->get();
+        })->where('is_active', 1)->get();
 
         // Check if the current user is an admin
         $isAdmin = Auth::user()->is_admin;
@@ -110,6 +112,9 @@ class VideoController extends Controller
         try {
             // Get the video
             $video = Video::findOrFail($id);
+            if ($video->is_active == 0) {
+                return redirect()->back()->with('error', 'Video not found.');
+            }
 
             // Get the current user ID
             $userId = Auth::id();

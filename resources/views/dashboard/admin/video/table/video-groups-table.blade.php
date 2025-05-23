@@ -26,7 +26,7 @@
                                     <div class="d-flex flex-column justify-content-center">
                                         <span>{{ $group->title }}</span>
                                         <p class="text-xs text-secondary mb-0">
-                                            {!! strip_tags(Str::limit($group->description, 50)) !!}</p>
+                                            {{ Str::limit(strip_tags($group->description), 50) }}
                                     </div>
                                 </div>
 

@@ -134,7 +134,7 @@
                                                             class="text-secondary text-sm">{{ $video->count_view }}</span>
                                                     </td>
                                                     <td class="align-middle text-center">
-                                                        <a href="{{ route('user.video.show', [$videoGroup->videoGroup->id,$video->id]) }}"
+                                                        <a href="{{ route('user.video.show', [$videoGroup->videoGroup->id, $video->id]) }}"
                                                             class="btn btn-sm bg-gradient-info">Watch</a>
                                                     </td>
                                                 </tr>

@@ -59,10 +59,10 @@
             @if (session('success') || session('status'))
                 <x-ui-dash.ui.alert :IS_ERROR="false" :HEAD="'Success'" :TITLE="session('success') . session('status')" />
             @endif
-            @if ($errors->any())
+            @if ($errors->any() || session('error'))
                 <x-ui-dash.ui.alert :IS_ERROR="true" :HEAD="'Error'">
                     <x-slot name="TITLE">
-                        <ul class="mb-0">
+                        <ul class="mb-0">{{session('error')}}
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach

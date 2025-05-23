@@ -24,7 +24,7 @@
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
                                         <span>{{ $video->title }}</span>
-                                        <p class="text-xs text-secondary mb-0">{!! Str::limit($video->description, 50) !!}</p>
+{{ Str::limit(strip_tags($video->description), 50) }}
                                     </div>
                                 </div>
                             </td>
