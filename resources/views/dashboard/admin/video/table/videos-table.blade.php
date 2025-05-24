@@ -19,7 +19,7 @@
                             <td class="text-xs font-weight-normal">
                                 <div class="d-flex px-2 py-1 align-items-center">
                                     <div>
-                                        <img src="{{ $video->cover ? asset('storage/' . $video->cover) : asset('assets/img/default-video.jpg') }}"
+                                        <img src="{{ $video->cover ? asset('storage/' . $video->cover) : asset('assets/images/vegex.png') }}"
                                             class="avatar avatar-xs me-2" alt="{{ $video->title }}">
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">

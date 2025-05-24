@@ -73,21 +73,29 @@ Route::middleware('auth')->group(function () {
     });
     Route::middleware(AdminVerfied::class)->group(function () {
         Route::group(['prefix' => 'admin'], function () {
-            // Group Video Routes
-            Route::get('/video/groups', [AdminGroupVideoController::class, 'index'])->name('admin.video.groups');
-            Route::get('/video/group/create', [AdminGroupVideoController::class, 'create'])->name('admin.video.group.create');
-            Route::post('/video/group', [AdminGroupVideoController::class, 'store'])->name('admin.video.group.store');
-            Route::get('/video/group/{groupVideo}/edit', [AdminGroupVideoController::class, 'edit'])->name('admin.video.group.edit');
-            Route::put('/video/group/{groupVideo}', [AdminGroupVideoController::class, 'update'])->name('admin.video.group.update');
-            Route::put('/video/group/{groupVideo}/destroy', [AdminGroupVideoController::class, 'destroy'])->name('admin.video.group.destroy');
 
-            // Video Routes
-            Route::get('/videos', [AdminVideoController::class, 'index'])->name('admin.videos');
-            Route::get('/video/create', [AdminVideoController::class, 'create'])->name('admin.video.create');
-            Route::post('/video', [AdminVideoController::class, 'store'])->name('admin.video.store');
-            Route::get('/video/{id}/edit', [AdminVideoController::class, 'edit'])->name('admin.video.edit');
-            Route::put('/video/{id}', [AdminVideoController::class, 'update'])->name('admin.video.update');
-            Route::delete('/video/{id}', [AdminVideoController::class, 'destroy'])->name('admin.video.destroy');
+            Route::group(['prefix' => '/course'], function () {
+                // Group Video Routes
+
+                Route::get('/groups', [AdminGroupVideoController::class, 'index'])->name('admin.video.groups');
+                Route::get('/group/create', [AdminGroupVideoController::class, 'create'])->name('admin.video.group.create');
+                Route::post('/group', [AdminGroupVideoController::class, 'store'])->name('admin.video.group.store');
+                Route::get('/group/{groupVideo}/edit', [AdminGroupVideoController::class, 'edit'])->name('admin.video.group.edit');
+                Route::put('/group/{groupVideo}', [AdminGroupVideoController::class, 'update'])->name('admin.video.group.update');
+                Route::put('/group/{groupVideo}/destroy', [AdminGroupVideoController::class, 'destroy'])->name('admin.video.group.destroy');
+
+                // Video Routes
+                Route::get('/all', [AdminVideoController::class, 'index'])->name('admin.videos');
+                Route::get('/create', [AdminVideoController::class, 'create'])->name('admin.video.create');
+                Route::post('/', [AdminVideoController::class, 'store'])->name('admin.video.store');
+                Route::get('/{id}/edit', [AdminVideoController::class, 'edit'])->name('admin.video.edit');
+                Route::put('/{id}', [AdminVideoController::class, 'update'])->name('admin.video.update');
+                Route::delete('/{id}', [AdminVideoController::class, 'destroy'])->name('admin.video.destroy');
+            });
+            Route::prefix('/user')->group(function () {
+                Route::get('/all', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.users');
+            });
+
         });
     });
 });
